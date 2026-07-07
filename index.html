@@ -2,7 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Bundled Page</title>
+  <title>Hopkins Quant Trading</title>
+  <meta name="description" content="A student-run community at Hopkins exploring quantitative finance — research, live trading competitions, and the careers they open.">
+  <meta property="og:title" content="Hopkins Quant Trading">
+  <meta property="og:description" content="A student-run community at Hopkins exploring quantitative finance — research, live trading competitions, and the careers they open.">
+  <meta property="og:type" content="website">
   <link rel="prefetch" href="about.html">
   <link rel="prefetch" href="competitions.html">
   <link rel="prefetch" href="coffee-chats.html">
@@ -150,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
       window.Babel.transformScriptTags();
     }
+    document.title = 'Hopkins Quant Trading';
     requestAnimationFrame(function() { document.documentElement.style.opacity = '1'; });
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);

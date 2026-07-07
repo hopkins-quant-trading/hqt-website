@@ -2,7 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Bundled Page</title>
+  <title>Coffee Chats · Hopkins Quant Trading</title>
+  <meta name="description" content="Thinking about quant, curious what we do, or just want to ask questions? Reach out to any exec board member directly — we're always happy to chat over coffee.">
+  <meta property="og:title" content="Coffee Chats · Hopkins Quant Trading">
+  <meta property="og:description" content="Thinking about quant, curious what we do, or just want to ask questions? Reach out to any exec board member directly — we're always happy to chat over coffee.">
+  <meta property="og:type" content="website">
   <link rel="prefetch" href="index.html">
   <link rel="prefetch" href="about.html">
   <link rel="prefetch" href="competitions.html">
@@ -150,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
       window.Babel.transformScriptTags();
     }
+    document.title = 'Coffee Chats · Hopkins Quant Trading';
     requestAnimationFrame(function() { document.documentElement.style.opacity = '1'; });
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);
