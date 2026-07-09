@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register · Hopkins Quant Trading</title>
+  <meta name="description" content="Register interest for the Hopkins Trading Competition.">
+  <meta name="robots" content="noindex">
+  <style>
+    @font-face {
+      font-family: 'Bricolage Grotesque'; font-style: normal; font-weight: 400 700;
+      font-display: swap; src: url("assets/fonts/bricolage-grotesque-latin.woff2") format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2122;
+    }
+    @font-face {
+      font-family: 'Instrument Sans'; font-style: normal; font-weight: 400 600;
+      font-display: swap; src: url("assets/fonts/instrument-sans-latin.woff2") format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2122;
+    }
+    :root {
+      --ink: #0A0A0A; --muted: #4A4A44; --faint: #6E6E68;
+      --bg: #FFFFFF; --panel: #F4F3F0; --card: #FFFFFF; --line: #ECEBE6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    a { color: inherit; }
+    body {
+      background: var(--bg); color: var(--ink); min-height: 100vh;
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5; -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 50; display: flex; align-items: center;
+      justify-content: space-between; padding: 18px 40px;
+      background: rgba(255,255,255,0.8); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand span { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+    .back { color: var(--faint); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .back:hover { color: var(--ink); }
+    .wrap { max-width: 640px; margin: 0 auto; padding: 56px 20px 96px; }
+    h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: clamp(36px, 6vw, 52px); letter-spacing: -0.03em; line-height: 1; }
+    .sub { color: var(--muted); margin: 18px 0 36px; font-size: 17px; max-width: 520px; }
+    form { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 30px; }
+    .field { margin-bottom: 22px; }
+    label { display: block; font-weight: 500; font-size: 14px; margin-bottom: 7px; }
+    .req { color: #b04a4a; }
+    input, select, textarea {
+      width: 100%; font: inherit; color: var(--ink);
+      background: #FAFAF8; border: 1px solid var(--line); border-radius: 12px;
+      padding: 12px 14px; outline: none; transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #b9b7ae; box-shadow: 0 0 0 3px rgba(10,10,10,0.05); }
+    textarea { resize: vertical; min-height: 104px; }
+    .err { color: #b04a4a; font-size: 13px; margin-top: 5px; display: none; }
+    .field.invalid .err { display: block; }
+    .field.invalid input, .field.invalid select, .field.invalid textarea { border-color: #d09a9a; }
+    button {
+      width: 100%; font: inherit; font-weight: 600; cursor: pointer;
+      background: var(--ink); color: #fff; border: none; border-radius: 999px;
+      padding: 15px; margin-top: 8px; transition: opacity .15s;
+    }
+    button:hover { opacity: .9; }
+    button:disabled { opacity: .5; cursor: default; }
+    .note { color: var(--faint); font-size: 13px; margin-top: 16px; text-align: center; }
+    .done { display: none; background: var(--panel); border-radius: 24px; padding: 48px 30px; text-align: center; }
+    .done h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 30px; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .done p { color: var(--muted); max-width: 380px; margin: 0 auto; }
+    .form-error { display: none; background: #fbecec; border: 1px solid #e6c4c4; color: #8a3b3b; border-radius: 12px; padding: 12px 14px; font-size: 14px; margin-bottom: 20px; }
+    @media (max-width: 680px) { nav { padding: 14px 20px; } form { padding: 22px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/">
+      <svg width="30" height="30" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="38" r="33" stroke="currentColor" stroke-width="4"></circle><line x1="17" y1="37" x2="83" y2="37" stroke="currentColor" stroke-width="4"></line><line x1="50" y1="37" x2="50" y2="95" stroke="currentColor" stroke-width="4"></line><line x1="17" y1="7" x2="17" y2="67" stroke="currentColor" stroke-width="4"></line><line x1="83" y1="7" x2="83" y2="67" stroke="currentColor" stroke-width="4"></line><circle cx="17" cy="7" r="5" fill="currentColor"></circle><circle cx="83" cy="7" r="5" fill="currentColor"></circle><circle cx="17" cy="67" r="5" fill="currentColor"></circle><circle cx="83" cy="67" r="5" fill="currentColor"></circle></svg>
+      <span>Hopkins Quant Trading</span>
+    </a>
+    <a class="back" href="/competitions">← Back</a>
+  </nav>
+
+  <div class="wrap">
+    <h1>Register interest</h1>
+    <p class="sub">The Hopkins Trading Competition — Spring 2026, date TBA. Leave your details and we'll email you as soon as registration opens.</p>
+
+    <form id="register" novalidate>
+      <div class="form-error" id="form-error"></div>
+
+      <div class="field" data-field="name">
+        <label for="name">Full name <span class="req">*</span></label>
+        <input id="name" name="name" type="text" autocomplete="name" maxlength="120">
+        <div class="err"></div>
+      </div>
+
+      <div class="field" data-field="email">
+        <label for="email">Email <span class="req">*</span></label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="200">
+        <div class="err"></div>
+      </div>
+
+      <div class="field" data-field="school">
+        <label for="school">School / university <span class="req">*</span></label>
+        <input id="school" name="school" type="text" maxlength="160" placeholder="e.g. Johns Hopkins University">
+        <div class="err"></div>
+      </div>
+
+      <div class="field" data-field="year">
+        <label for="year">Year <span class="req">*</span></label>
+        <select id="year" name="year">
+          <option value="">Select…</option>
+          <option>Freshman</option>
+          <option>Sophomore</option>
+          <option>Junior</option>
+          <option>Senior</option>
+          <option>Graduate</option>
+          <option>Other</option>
+        </select>
+        <div class="err"></div>
+      </div>
+
+      <div class="field" data-field="experience">
+        <label for="experience">Trading / quant experience (optional)</label>
+        <textarea id="experience" name="experience" maxlength="4000" placeholder="Competitions you've done, coursework, projects…"></textarea>
+        <div class="err"></div>
+      </div>
+
+      <button type="submit" id="submit">Register interest</button>
+      <p class="note">We'll email you when registration opens.</p>
+    </form>
+
+    <div class="done" id="done">
+      <h2>You're on the list</h2>
+      <p>Thanks for registering — we'll email you the details as soon as registration opens.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('register');
+    const doneEl = document.getElementById('done');
+    const submitBtn = document.getElementById('submit');
+    const formError = document.getElementById('form-error');
+
+    function setFieldError(name, msg) {
+      const wrap = form.querySelector('[data-field="' + name + '"]');
+      if (!wrap) return;
+      wrap.classList.toggle('invalid', !!msg);
+      const el = wrap.querySelector('.err');
+      if (el) el.textContent = msg || '';
+    }
+
+    function clearErrors() {
+      form.querySelectorAll('.field').forEach(f => f.classList.remove('invalid'));
+      formError.style.display = 'none';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const payload = await res.json().catch(() => ({}));
+
+        if (res.ok) {
+          form.style.display = 'none';
+          doneEl.style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        if (payload.errors) {
+          Object.entries(payload.errors).forEach(([k, v]) => setFieldError(k, v));
+        } else {
+          formError.textContent = payload.error || 'Something went wrong. Please try again.';
+          formError.style.display = 'block';
+        }
+      } catch (err) {
+        formError.textContent = 'Network error. Please check your connection and try again.';
+        formError.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Register interest';
+      }
+    });
+  </script>
+</body>
+</html>
