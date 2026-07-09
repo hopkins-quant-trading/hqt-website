@@ -1,13 +1,12 @@
-// POST /api/register — receives a Hopkins Trading Competition registration
-// submitted from /register-form.
+// POST /api/register — receives competition interest expressions from /register-form.
+// This captures interest *before* real competition registration opens.
+// When registration actually opens, replace this with a separate endpoint
+// that writes to the "Competition Registrations" table instead.
 //
-// Second of the two application pipelines (the other is api/apply.js for
-// club membership). Same Airtable base, separate table.
-//
-// Setup — same env vars as api/apply.js, plus the table name:
+// Setup — same env vars as api/apply.js:
 //   AIRTABLE_TOKEN                = pat_...
 //   AIRTABLE_BASE_ID              = app...
-//   AIRTABLE_TABLE_COMPETITION    = Competition Registrations   (optional; default)
+//   AIRTABLE_TABLE_COMPETITION    = Competition Interest   (optional; default)
 
 const FIELDS = {
   name: { required: true, max: 120, airtable: "Name" },
@@ -46,7 +45,7 @@ function validate(body) {
 async function saveToAirtable(clean) {
   const token = process.env.AIRTABLE_TOKEN;
   const baseId = process.env.AIRTABLE_BASE_ID;
-  const table = process.env.AIRTABLE_TABLE_COMPETITION || "Competition Registrations";
+  const table = process.env.AIRTABLE_TABLE_COMPETITION || "Competition Interest";
 
   if (!token || !baseId) {
     // Not configured yet — log so nothing is lost during local dev / setup.
