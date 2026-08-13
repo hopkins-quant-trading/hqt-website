@@ -1,0 +1,215 @@
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/assets/fonts/bricolage-grotesque-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2122;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/assets/fonts/instrument-sans-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+2122;
+}
+:root {
+  --ink: #0a0a0a;
+  --muted: #4a4a44;
+  --faint: #6e6e68;
+  --bg: #ffffff;
+  --panel: #f4f3f0;
+  --card: #ffffff;
+  --line: #ecebe6;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  font-family:
+    "Instrument Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.brand span {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.back {
+  color: var(--faint);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.back:hover {
+  color: var(--ink);
+}
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 56px 20px 96px;
+}
+h1 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 52px);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.sub {
+  color: var(--muted);
+  margin: 18px 0 36px;
+  font-size: 17px;
+  max-width: 520px;
+}
+form {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 30px;
+}
+.field {
+  margin-bottom: 22px;
+}
+label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+.req {
+  color: #b04a4a;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: #fafaf8;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #b9b7ae;
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.05);
+}
+textarea {
+  resize: vertical;
+  min-height: 104px;
+}
+.err {
+  color: #b04a4a;
+  font-size: 13px;
+  margin-top: 5px;
+  display: none;
+}
+.field.invalid .err {
+  display: block;
+}
+.field.invalid input,
+.field.invalid select,
+.field.invalid textarea {
+  border-color: #d09a9a;
+}
+button {
+  width: 100%;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 15px;
+  margin-top: 8px;
+  transition: opacity 0.15s;
+}
+button:hover {
+  opacity: 0.9;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.note {
+  color: var(--faint);
+  font-size: 13px;
+  margin-top: 16px;
+  text-align: center;
+}
+.done {
+  display: none;
+  background: var(--panel);
+  border-radius: 24px;
+  padding: 48px 30px;
+  text-align: center;
+}
+.done h2 {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+.done p {
+  color: var(--muted);
+  max-width: 380px;
+  margin: 0 auto;
+}
+.form-error {
+  display: none;
+  background: #fbecec;
+  border: 1px solid #e6c4c4;
+  color: #8a3b3b;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+@media (max-width: 680px) {
+  nav {
+    padding: 14px 20px;
+  }
+  form {
+    padding: 22px;
+  }
+}

@@ -1,0 +1,98 @@
+{{NAV}}
+
+<!-- HEADER -->
+<header class="page-header">
+  <h1 data-reveal class="page-title">Join HQT.</h1>
+  <p data-reveal data-reveal-delay="120" class="page-sub apply-sub">
+    We recruit new members every year — no finance background required.
+    Everything you need to know about applying is right here.
+  </p>
+</header>
+
+<!-- APPLICATION (dark, closed) -->
+<section class="apply-status-section">
+  <div data-reveal class="apply-status-card">
+    <div class="apply-status-grid">
+      <div>
+        <h2 class="apply-status-title">
+          Applications are<br />currently closed.
+        </h2>
+        <p class="apply-status-desc">
+          We recruit new members every year. Applications for the next cohort
+          aren't open yet — in the meantime, follow our socials to hear when
+          they reopen.
+        </p>
+        <div class="apply-status-pill-row">
+          <span aria-disabled="true" class="apply-status-pill">
+            <span class="apply-status-pill-dot"></span>Application closed
+          </span>
+        </div>
+      </div>
+      <div class="apply-status-panel">
+        <div class="apply-status-row">
+          <span class="apply-status-label">Status</span><span>Closed</span>
+        </div>
+        <div class="apply-status-divider"></div>
+        <div class="apply-status-row">
+          <span class="apply-status-label">Next cycle</span
+          ><span>Spring 2026</span>
+        </div>
+        <div class="apply-status-divider"></div>
+        <div class="apply-status-row">
+          <span class="apply-status-label">Open to</span><span>All majors</span>
+        </div>
+        <div class="apply-status-divider"></div>
+        <div class="apply-status-row">
+          <span class="apply-status-label">Questions?</span
+          ><a href="mailto:hopkinsquant@gmail.com" class="apply-status-link"
+            >Email the board</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2 data-reveal class="faq-heading">Frequently asked questions</h2>
+  <div data-reveal data-reveal-delay="120" class="faq-list">
+    <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="6">
+      <details class="faq">
+        <summary>
+          {{ q.q }}<span class="faq-icon"
+            ><svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 5v14M5 12h14"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+              ></path></svg
+          ></span>
+        </summary>
+        <div class="faq-a">{{ q.a }}</div>
+      </details>
+    </sc-for>
+  </div>
+</section>
+
+{{FOOTER}}
+
+<script type="text/x-dc" data-dc-script="">
+  class Component extends DCLogic {
+    renderVals() {
+      // When applications open: on the page above, swap the disabled "Application closed"
+      // pill for a link to /apply-form (see apply-form.html + api/apply.js),
+      // and update Status / Next cycle.
+      const faqs = [
+        { q:'Who can apply?', a:'Any Hopkins student — all majors and class years are welcome. You don’t need a finance background to join.' },
+        { q:'When do applications open?', a:'The next cycle opens in Spring 2026. We announce exact dates on our Instagram and LinkedIn, so give us a follow to hear first.' },
+        { q:'Do I need trading or coding experience?', a:'No. Curiosity and a willingness to practice matter most — an interest in math, probability, or markets helps, and we teach the rest.' },
+        { q:'What does the application involve?', a:'A short application form. Shortlisted applicants are then invited to a conversation with the board.' },
+        { q:'What’s the time commitment?', a:'Weekly sessions during the semester — interview prep, practice rounds, and speaker events — plus competition weekends for members who compete.' },
+        { q:'I have a question that isn’t answered here.', a:'Email any board member — you’ll find our emails on the About page — and we’ll get back to you.' },
+      ];
+      return { faqs };
+    }
+  }
+</script>

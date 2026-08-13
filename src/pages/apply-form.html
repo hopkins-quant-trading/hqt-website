@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Application · Hopkins Quant Trading</title>
+    <meta
+      name="description"
+      content="Submit your application to Hopkins Quant Trading."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="/styles/forms.css" />
+  </head>
+  <body>
+    <nav>
+      <a class="brand" href="/">
+        <svg width="30" height="30" viewBox="0 0 100 100" fill="none">
+          <circle
+            cx="50"
+            cy="38"
+            r="33"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <line
+            x1="17"
+            y1="37"
+            x2="83"
+            y2="37"
+            stroke="currentColor"
+            stroke-width="4"
+          ></line>
+          <line
+            x1="50"
+            y1="37"
+            x2="50"
+            y2="95"
+            stroke="currentColor"
+            stroke-width="4"
+          ></line>
+          <line
+            x1="17"
+            y1="7"
+            x2="17"
+            y2="67"
+            stroke="currentColor"
+            stroke-width="4"
+          ></line>
+          <line
+            x1="83"
+            y1="7"
+            x2="83"
+            y2="67"
+            stroke="currentColor"
+            stroke-width="4"
+          ></line>
+          <circle cx="17" cy="7" r="5" fill="currentColor"></circle>
+          <circle cx="83" cy="7" r="5" fill="currentColor"></circle>
+          <circle cx="17" cy="67" r="5" fill="currentColor"></circle>
+          <circle cx="83" cy="67" r="5" fill="currentColor"></circle>
+        </svg>
+        <span>Hopkins Quant Trading</span>
+      </a>
+      <a class="back" href="/apply">← Back</a>
+    </nav>
+
+    <div class="wrap">
+      <h1>Application</h1>
+      <p class="sub">
+        Tell us a bit about yourself. Fields marked
+        <span class="req">*</span> are required.
+      </p>
+
+      <form id="apply" novalidate>
+        <div class="form-error" id="form-error"></div>
+
+        <div class="field" data-field="name">
+          <label for="name">Full name <span class="req">*</span></label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            maxlength="120"
+          />
+          <div class="err"></div>
+        </div>
+
+        <div class="field" data-field="email">
+          <label for="email">Email <span class="req">*</span></label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="200"
+          />
+          <div class="err"></div>
+        </div>
+
+        <div class="field" data-field="year">
+          <label for="year">Year <span class="req">*</span></label>
+          <select id="year" name="year">
+            <option value="">Select…</option>
+            <option>Freshman</option>
+            <option>Sophomore</option>
+            <option>Junior</option>
+            <option>Senior</option>
+            <option>Graduate</option>
+            <option>Other</option>
+          </select>
+          <div class="err"></div>
+        </div>
+
+        <div class="field" data-field="major">
+          <label for="major">Major <span class="req">*</span></label>
+          <input id="major" name="major" type="text" maxlength="120" />
+          <div class="err"></div>
+        </div>
+
+        <div class="field" data-field="experience">
+          <label for="experience">Relevant experience (optional)</label>
+          <textarea
+            id="experience"
+            name="experience"
+            maxlength="4000"
+            placeholder="Coursework, projects, prior trading / quant / CS experience…"
+          ></textarea>
+          <div class="err"></div>
+        </div>
+
+        <div class="field" data-field="why">
+          <label for="why"
+            >Why do you want to join? <span class="req">*</span></label
+          >
+          <textarea id="why" name="why" maxlength="4000"></textarea>
+          <div class="err"></div>
+        </div>
+
+        <button type="submit" id="submit">Submit application</button>
+        <p class="note">We'll follow up by email.</p>
+      </form>
+
+      <div class="done" id="done">
+        <h2>Application received</h2>
+        <p>
+          Thanks for applying — we'll be in touch at the email you provided.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("apply");
+      const doneEl = document.getElementById("done");
+      const submitBtn = document.getElementById("submit");
+      const formError = document.getElementById("form-error");
+
+      function setFieldError(name, msg) {
+        const wrap = form.querySelector('[data-field="' + name + '"]');
+        if (!wrap) return;
+        wrap.classList.toggle("invalid", !!msg);
+        const el = wrap.querySelector(".err");
+        if (el) el.textContent = msg || "";
+      }
+
+      function clearErrors() {
+        form
+          .querySelectorAll(".field")
+          .forEach((f) => f.classList.remove("invalid"));
+        formError.style.display = "none";
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        clearErrors();
+
+        const data = Object.fromEntries(new FormData(form).entries());
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting…";
+
+        try {
+          const res = await fetch("/api/apply", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+          const payload = await res.json().catch(() => ({}));
+
+          if (res.ok) {
+            form.style.display = "none";
+            doneEl.style.display = "block";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+          }
+
+          if (payload.errors) {
+            Object.entries(payload.errors).forEach(([k, v]) =>
+              setFieldError(k, v),
+            );
+          } else {
+            formError.textContent =
+              payload.error || "Something went wrong. Please try again.";
+            formError.style.display = "block";
+          }
+        } catch (err) {
+          formError.textContent =
+            "Network error. Please check your connection and try again.";
+          formError.style.display = "block";
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit application";
+        }
+      });
+    </script>
+  </body>
+</html>
