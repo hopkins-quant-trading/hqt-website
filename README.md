@@ -6,27 +6,59 @@ Static marketing/info site for HQT, deployed on [Vercel](https://vercel.com).
 
 ```
 /
-├── index.html            # Landing page (who we are, track record, gallery)
-├── about.html            # About / team (leadership incl. board emails, members, destinations)
-├── competitions.html     # The HQT-hosted Hopkins Trading Competition
-├── apply.html            # Apply landing page (status + FAQ)
-├── apply-form.html       # Club membership application form (→ /apply-form)
-├── register-form.html    # Hosted-competition registration form (→ /register-form)
-├── support.js            # Shared client runtime (GENERATED — see note below)
-├── assets/               # Images, logos, team photos, fonts
+├── src/
+│   ├── shell.html          # Outer page wrapper shared by every bundled page (see below)
+│   ├── partials/
+│   │   ├── nav.html        # Shared nav, injected into every bundled page
+│   │   └── footer.html     # Shared footer, injected into every bundled page
+│   ├── styles/
+│   │   ├── main.css        # Shared design system for index/about/competitions/apply
+│   │   └── forms.css       # Shared styles for the two standalone form pages
+│   └── pages/
+│       ├── index.html          # Landing page (who we are, track record, gallery)
+│       ├── about.html          # About / team (leadership incl. board emails, members, destinations)
+│       ├── competitions.html   # The HQT-hosted Hopkins Trading Competition
+│       ├── apply.html          # Apply landing page (status + FAQ)
+│       ├── apply-form.html     # Club membership application form (→ /apply-form)
+│       └── register-form.html  # Hosted-competition registration form (→ /register-form)
+├── scripts/build.js       # Builds src/ → dist/ (see "Build" below)
+├── support.js             # Shared client runtime (GENERATED — see note below)
+├── assets/                # Images, logos, team photos, fonts
 │   ├── fonts/
 │   ├── gallery/
 │   ├── logos/
 │   └── team/
-├── api/                  # Vercel serverless functions (the backend)
-│   ├── apply.js          # Membership form POST → Airtable "Applications"
-│   └── register.js       # Competition form POST → Airtable "Competition Registrations"
-└── vercel.json           # Clean URLs + /coffee-chats → /apply redirect
+├── api/                   # Vercel serverless functions (the backend)
+│   ├── apply.js           # Membership form POST → Airtable "Applications"
+│   └── register.js        # Competition form POST → Airtable "Competition Registrations"
+└── vercel.json            # Build command/output dir, clean URLs, /coffee-chats → /apply redirect
 ```
 
-The public pages are plain static HTML served directly from the repo root —
-no build step. `support.js` is generated from a separate `dc-runtime`
-source and should not be hand-edited.
+`support.js` is generated from a separate `dc-runtime` source and should not
+be hand-edited.
+
+## Build
+
+The four content pages (`index`, `about`, `competitions`, `apply`) render via
+a small React/Babel-in-browser runtime (`support.js`) that expects a single
+JSON-string-encoded template per page — that's what actually ships. Editing
+that format by hand isn't practical (see
+`docs/superpowers/specs/2026-08-13-source-cleanup-design.md` for why), so the
+real source lives in `src/` as plain, readable HTML/CSS, and
+`scripts/build.js` compiles it into that shipped format:
+
+```bash
+npm install
+npm run build          # writes dist/ — this is what Vercel deploys
+npx serve dist          # preview locally
+```
+
+`vercel.json` sets `buildCommand`/`outputDirectory` so Vercel runs this
+automatically on every deploy. The two form pages (`apply-form.html`,
+`register-form.html`) are already plain static HTML/CSS/JS — no bundling
+needed — so the build just copies them through.
+
+Run `npm run format` (Prettier) before committing changes under `src/`.
 
 ## Why this structure (vs. a Flask app)
 
@@ -70,8 +102,8 @@ Until those vars are set, both endpoints validate input and log the
 submission (without saving) so the form still works during setup — it does
 **not** silently lose data once configured.
 
-**When applications open:** in `apply.html`, replace the disabled
-"Application closed" pill with a link to `/apply-form`.
+**When applications open:** in `src/pages/apply.html`, replace the disabled
+"Application closed" pill with a link to `/apply-form`, then `npm run build`.
 
 **Optional later:** email the board on each submission (Airtable automations
 can do this with no code), or move to Postgres if you outgrow Airtable.
@@ -80,7 +112,7 @@ can do this with no code), or move to Postgres if you outgrow Airtable.
 
 ```bash
 npm i -g vercel   # once
-vercel dev        # serves the static site + api/ functions locally
+vercel dev        # runs the build, then serves dist/ + api/ functions locally
 ```
 
 ## Deploy

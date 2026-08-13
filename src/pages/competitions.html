@@ -1,0 +1,70 @@
+{{NAV}}
+
+<!-- HEADER -->
+<header class="page-header">
+  <h1 data-reveal class="page-title">Trade live.<br />Compete hard.</h1>
+  <p data-reveal data-reveal-delay="120" class="page-sub competitions-sub">
+    We're hosting our very first HQT trading competition — open to students who
+    want to test themselves on a live simulated exchange. Everything you need to
+    know is below.
+  </p>
+</header>
+
+<!-- FEATURED (dark) -->
+<section class="featured-section">
+  <div data-reveal class="featured-card">
+    <div class="featured-eyebrow">
+      <span class="featured-eyebrow-dot"></span>Next up
+    </div>
+    <div class="featured-grid">
+      <div>
+        <h2 class="featured-title">Hopkins Trading Competition</h2>
+        <p class="featured-desc">
+          A day-long market-making and estimation challenge hosted on campus.
+          Participants trade a live simulated exchange for cash prizes.
+        </p>
+      </div>
+      <div class="featured-meta">
+        <div class="featured-meta-row">
+          <span class="featured-meta-label">Date</span
+          ><span>TBA · Spring 2026</span>
+        </div>
+        <div class="featured-meta-row">
+          <span class="featured-meta-label">Format</span><span>Individual</span>
+        </div>
+        <div class="featured-meta-row">
+          <span class="featured-meta-label">Venue</span><span>TBD</span>
+        </div>
+        <a href="/register-form" class="btn btn-white">Register interest →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect-section">
+  <div class="expect-grid">
+    <sc-for list="{{ expect }}" as="p" hint-placeholder-count="3">
+      <div data-reveal data-reveal-delay="{{ p.delay }}" class="expect-card">
+        <div class="expect-no">{{ p.no }}</div>
+        <div class="expect-title">{{ p.title }}</div>
+        <p class="expect-body">{{ p.body }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+{{FOOTER}}
+
+<script type="text/x-dc" data-dc-script="">
+  class Component extends DCLogic {
+    renderVals() {
+      const expect = [
+        { no:'01', title:'Live trading', body:'A day on a live simulated exchange — market-making and estimation rounds against other competitors.' },
+        { no:'02', title:'Cash prizes', body:'Top finishers take home cash prizes, and everyone leaves with a real feel for how trading works.' },
+        { no:'03', title:'No experience needed', body:'Open to all students — we’ll walk everyone through the format before trading starts.' },
+      ].map((p, i) => ({ ...p, delay: i * 80 }));
+      return { expect };
+    }
+  }
+</script>

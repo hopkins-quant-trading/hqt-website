@@ -1,0 +1,12 @@
+{
+  "name": "hqt-website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "format": "prettier --write \"src/**/*.{html,css,js}\" \"scripts/**/*.js\"",
+    "format:check": "prettier --check \"src/**/*.{html,css,js}\" \"scripts/**/*.js\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

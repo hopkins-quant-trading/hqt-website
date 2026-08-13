@@ -1,0 +1,136 @@
+{{NAV}}
+
+<!-- HEADER -->
+<header class="page-header">
+  <h1 data-reveal class="page-title">About Us</h1>
+  <p data-reveal data-reveal-delay="120" class="page-sub about-sub">
+    Members, leadership, and the alumni network that keeps growing across the
+    quant industry.
+  </p>
+</header>
+
+<!-- LEADERSHIP -->
+<section class="leadership-section">
+  <div data-reveal class="section-header-row">
+    <h2 class="section-heading">Leadership</h2>
+  </div>
+  <div class="leaders-grid">
+    <sc-for list="{{ leaders }}" as="m" hint-placeholder-count="6">
+      <div data-reveal data-reveal-delay="{{ m.delay }}">
+        <div class="leader-photo-frame">
+          <sc-if value="{{ m.photo }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ m.photo }}" alt="{{ m.name }}" />
+          </sc-if>
+          <span class="photo-placeholder-text">Photo</span>
+        </div>
+        <div class="leader-name">{{ m.name }}</div>
+        <div class="leader-role">{{ m.role }}</div>
+        <a
+          href="{{ m.linkedin }}"
+          target="_blank"
+          rel="noopener"
+          class="leader-linkedin"
+        >
+          <span class="linkedin-badge">in</span>LinkedIn
+        </a>
+        <sc-if value="{{ m.email }}" hint-placeholder-val="{{ true }}">
+          <a href="{{ m.mailto }}" class="leader-email">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <rect
+                x="3"
+                y="5"
+                width="18"
+                height="14"
+                rx="3"
+                stroke="currentColor"
+                stroke-width="1.8"
+              ></rect>
+              <path
+                d="M4 7.5l8 5 8-5"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path></svg
+            ><span class="leader-email-text">{{ m.email }}</span>
+          </a>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- MEMBERS -->
+<section class="members-section">
+  <div data-reveal class="section-header-row">
+    <h2 class="section-heading">Members</h2>
+  </div>
+  <div class="members-grid">
+    <sc-for list="{{ members }}" as="m" hint-placeholder-count="12">
+      <div data-reveal data-reveal-delay="{{ m.delay }}">
+        <div class="member-photo-frame">
+          <span class="photo-placeholder-text">Photo</span>
+        </div>
+        <div class="member-name">{{ m.name }}</div>
+        <a href="#" class="member-linkedin">
+          <span class="linkedin-badge linkedin-badge--sm">in</span>LinkedIn
+        </a>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- DESTINATIONS (dark) -->
+<section class="destinations-section">
+  <div class="destinations-inner">
+    <div data-reveal class="destinations-eyebrow">Destinations</div>
+    <h2 data-reveal class="destinations-heading">
+      Where our members and alumni are making impact.
+    </h2>
+    <div class="destinations-grid">
+      <sc-for list="{{ destinations }}" as="d" hint-placeholder-count="10">
+        <div data-reveal data-reveal-delay="{{ d.delay }}">
+          <div class="destination-logo-box">
+            <img src="{{ d.logo }}" alt="{{ d.name }}" />
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+{{FOOTER}}
+
+<script type="text/x-dc" data-dc-script="">
+  class Component extends DCLogic {
+    renderVals() {
+      const leaderData = [
+        { name:'Virochan Pandit', role:'President', email:'vpandit3@jhu.edu', linkedin:'https://www.linkedin.com/in/virochan-pandit/', photo:(window.__resources && window.__resources.teamVirochan || 'assets/team/virochan.png') },
+        { name:'Lijia Lin', role:'Vice President', email:'llin72@jh.edu', linkedin:'#', photo:(window.__resources && window.__resources.teamLijia || 'assets/team/lijia.png') },
+        { name:'Jasmine Yoon', role:'Head of Development', email:'yyoon25@jh.edu', linkedin:'#', photo:(window.__resources && window.__resources.teamJasmine || 'assets/team/jasmine.png') },
+        { name:'Alex Kim', role:'Head of Recruitment', email:'dkim232@jhu.edu', linkedin:'#', photo:(window.__resources && window.__resources.teamAlex || 'assets/team/alex.png') },
+        { name:'Mikhail (Misha) Zhernevskii', role:'Head of Outreach', linkedin:'https://www.linkedin.com/in/mishazher/', photo:(window.__resources && window.__resources.teamMisha || 'assets/team/misha.png') },
+        { name:'Michael Schmalz', role:'Head of Outreach', linkedin:'https://www.linkedin.com/in/michael-schmalz1/', photo:(window.__resources && window.__resources.teamMichael || 'assets/team/michael.png') },
+        { name:'Pahan Dewasurendra', role:'Head of Education', linkedin:'https://www.linkedin.com/in/pahan-dewa/', photo:(window.__resources && window.__resources.teamPahan || 'assets/team/pahan.png') },
+      ];
+      const leaders = leaderData.map((m, i) => ({ ...m, mailto: m.email ? 'mailto:' + m.email : '', delay: (i % 4) * 60 }));
+      const members = Array.from({ length: 12 }, (_, i) => ({ name:'Member Name', delay: (i % 6) * 50 }));
+      const firms = [
+        ['Jane Street',(window.__resources && window.__resources.logosJaneStreet || 'assets/logos/jane-street.png')],
+        ['Point72',(window.__resources && window.__resources.logosPoint72 || 'assets/logos/point72.png')],
+        ['Susquehanna',(window.__resources && window.__resources.logosSusquehanna || 'assets/logos/susquehanna.png')],
+        ['DRW',(window.__resources && window.__resources.logosDrw || 'assets/logos/drw.png')],
+        ['IMC',(window.__resources && window.__resources.logosImc || 'assets/logos/imc.png')],
+        ['OpenAI',(window.__resources && window.__resources.logosOpenai || 'assets/logos/openai.png')],
+        ['Walleye',(window.__resources && window.__resources.logosWalleye || 'assets/logos/walleye.png')],
+        ['AWS',(window.__resources && window.__resources.logosAws || 'assets/logos/aws.png')],
+        ['Chicago Trading Company',(window.__resources && window.__resources.logosChicagoTradingCompany || 'assets/logos/chicago-trading-company.png')],
+        ['Two Sigma',(window.__resources && window.__resources.logosTwoSigma || 'assets/logos/two-sigma.png')],
+        ['Bloomberg',(window.__resources && window.__resources.logosBloomberg || 'assets/logos/bloomberg.png')],
+        ['Palantir',(window.__resources && window.__resources.logosPalantir || 'assets/logos/palantir.png')],
+      ];
+      const destinations = firms.map((f, i) => ({ name:f[0], logo:f[1], delay: (i % 5) * 40 }));
+      return { leaders, members, memberCount: members.length, destinations };
+    }
+  }
+</script>
