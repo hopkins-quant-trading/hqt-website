@@ -9,32 +9,32 @@
   </p>
 </header>
 
-<!-- APPLICATION (dark, closed) -->
+<!-- APPLICATION (dark, open) -->
 <section class="apply-status-section">
   <div data-reveal class="apply-status-card">
     <div class="apply-status-grid">
       <div>
         <h2 class="apply-status-title">
-          Applications are<br />currently closed.
+          Applications are<br />now live!
         </h2>
         <p class="apply-status-desc">
-          We recruit new members every year. Applications for the next cohort
-          aren't open yet — in the meantime, follow our socials to hear when
-          they reopen.
+          We recruit new members every year, and applications for the Spring
+          2026 cohort are open now. Fill out the form to apply — all majors and
+          class years are welcome.
         </p>
         <div class="apply-status-pill-row">
-          <span aria-disabled="true" class="apply-status-pill">
-            <span class="apply-status-pill-dot"></span>Application closed
-          </span>
+          <a href="/apply-form" class="apply-status-pill apply-status-pill--live">
+            <span class="apply-status-pill-dot"></span>Apply now
+          </a>
         </div>
       </div>
       <div class="apply-status-panel">
         <div class="apply-status-row">
-          <span class="apply-status-label">Status</span><span>Closed</span>
+          <span class="apply-status-label">Status</span><span>Open</span>
         </div>
         <div class="apply-status-divider"></div>
         <div class="apply-status-row">
-          <span class="apply-status-label">Next cycle</span
+          <span class="apply-status-label">Cycle</span
           ><span>Spring 2026</span>
         </div>
         <div class="apply-status-divider"></div>
@@ -81,12 +81,12 @@
 <script type="text/x-dc" data-dc-script="">
   class Component extends DCLogic {
     renderVals() {
-      // When applications open: on the page above, swap the disabled "Application closed"
-      // pill for a link to /apply-form (see apply-form.html + api/apply.js),
-      // and update Status / Next cycle.
+      // When applications close: on the page above, swap the "Apply now" link
+      // (/apply-form — see apply-form.html + api/apply.js) back for a disabled
+      // "Application closed" pill, and set Status to Closed / Cycle to the next one.
       const faqs = [
         { q:'Who can apply?', a:'Any Hopkins student — all majors and class years are welcome. You don’t need a finance background to join.' },
-        { q:'When do applications open?', a:'The next cycle opens in Spring 2026. We announce exact dates on our Instagram and LinkedIn, so give us a follow to hear first.' },
+        { q:'When do applications open?', a:'Applications for the Spring 2026 cycle are open now — just fill out the form on this page to apply. We also announce updates on our Instagram and LinkedIn, so give us a follow to stay in the loop.' },
         { q:'Do I need trading or coding experience?', a:'No. Curiosity and a willingness to practice matter most — an interest in math, probability, or markets helps, and we teach the rest.' },
         { q:'What does the application involve?', a:'A short application form. Shortlisted applicants are then invited to a conversation with the board.' },
         { q:'What’s the time commitment?', a:'Weekly sessions during the semester — interview prep, practice rounds, and speaker events — plus competition weekends for members who compete.' },

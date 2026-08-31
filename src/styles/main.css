@@ -1266,6 +1266,19 @@ a {
   border-radius: 50%;
   background: #6f6f67;
 }
+.apply-status-pill--live {
+  background: #fff;
+  color: #0a0a0a;
+  border-color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.apply-status-pill--live:hover {
+  opacity: 0.82;
+}
+.apply-status-pill--live .apply-status-pill-dot {
+  background: #22c55e;
+}
 .apply-status-panel {
   border: 1px solid #2a2a2a;
   border-radius: 22px;
